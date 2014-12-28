@@ -1,3 +1,8 @@
+0.0.3
+-----
+
+- Insert operation refactorings.
+
 0.0.2
 -----
 
