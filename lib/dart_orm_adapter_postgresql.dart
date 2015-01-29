@@ -63,4 +63,8 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
 
     return sql;
   }
+
+  String getConstraintsSql(Table table) {
+    return '';
+  }
 }
