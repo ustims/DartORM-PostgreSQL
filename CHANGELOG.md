@@ -1,3 +1,8 @@
+0.0.6
+-----
+
+- SQLAdapter static methods refactoring.
+
 0.0.5
 -----
 

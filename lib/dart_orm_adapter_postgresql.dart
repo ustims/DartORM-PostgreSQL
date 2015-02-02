@@ -38,7 +38,7 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
   }
 
   Future<int> insert(Insert insert) async {
-    String sqlQueryString = PostgresqlDBAdapter.constructInsertSql(insert);
+    String sqlQueryString = this.constructInsertSql(insert);
 
     log.finest('Insert: ' + sqlQueryString);
 
@@ -59,8 +59,8 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
   /**
    * INSERT sql statement constructor.
    */
-  static String constructInsertSql(Insert insert) {
-    String sql = SQLAdapter.constructInsertSql(insert);
+  String constructInsertSql(Insert insert) {
+    String sql = super.constructInsertSql(insert);
 
     Field primaryKeyField = insert.table.getPrimaryKeyField();
     if(primaryKeyField != null) {
@@ -71,8 +71,12 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
     return sql;
   }
 
-  String convertDartType(Field field) {
-    String dbTypeName = super.convertDartType(field);
+  /**
+   * This method is invoked when db table(column) is created to determine
+   * what sql type to use.
+   */
+  String getSqlType(Field field) {
+    String dbTypeName = super.getSqlType(field);
 
     if(dbTypeName.length < 1){
       switch (field.propertyTypeName) {
