@@ -6,4 +6,4 @@ author: Ustimenko Sergey <ustims@gmail.com>
 homepage: http://github.com/ustims/DartORM-PostgreSQL
 dependencies:
   dart_orm: ">=0.0.4 <0.2.0"
-  postgresql: any
+  postgresql: ">=0.3.0+2 <0.4.0"

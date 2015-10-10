@@ -1,3 +1,8 @@
+0.0.9
+-----
+
+- postgresql package version constraint fix
+
 0.0.8
 -----
 

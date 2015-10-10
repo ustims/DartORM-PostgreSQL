@@ -5,7 +5,6 @@ import 'package:postgresql/postgresql.dart' as psql_connector;
 import 'dart:async';
 import 'package:logging/logging.dart';
 
-
 class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
   final Logger log = new Logger('DartORM.PostgreSQLDBAdapter');
 
@@ -20,7 +19,7 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
   }
 
   /// Closes all connections to the database.
-  void close () {
+  void close() {
     this.connection.close();
     log.finest('Connection closed.');
   }
@@ -29,7 +28,7 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
     try {
       var result = await super.select(select);
       return result;
-    } on psql_connector.PostgresqlException catch(e){
+    } on psql_connector.PostgresqlException catch (e) {
       switch (e.serverMessage.code) {
         case '42P01':
           throw new TableNotExistException();
@@ -49,7 +48,7 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
     log.finest('Insert: ' + sqlQueryString);
 
     var result = await connection.query(sqlQueryString).toList();
-    if(result.length > 0){
+    if (result.length > 0) {
       // if we have any results, here will be returned new primary key
       // of the inserted row
       return result[0][0];
@@ -69,7 +68,7 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
     String sql = super.constructInsertSql(insert);
 
     Field primaryKeyField = insert.table.getPrimaryKeyField();
-    if(primaryKeyField != null) {
+    if (primaryKeyField != null) {
       var primaryKeyName = SQL.camelCaseToUnderscore(primaryKeyField.fieldName);
       sql += '\nRETURNING ${primaryKeyName}';
     }
@@ -84,7 +83,7 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
   String getSqlType(Field field) {
     String dbTypeName = super.getSqlType(field);
 
-    if(dbTypeName.length < 1){
+    if (dbTypeName.length < 1) {
       switch (field.propertyTypeName) {
         case 'DateTime':
           dbTypeName = 'timestamp without time zone';
