@@ -48,17 +48,31 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
     log.finest('Insert: ' + sqlQueryString);
 
     var result = await connection.query(sqlQueryString).toList();
+
+    log.finest('Results:');
+    log.finest(result);
+
     if (result.length > 0) {
       // if we have any results, here will be returned new primary key
       // of the inserted row
       return result[0][0];
     }
 
+    // if model does'nt have primary key we simply return 0
+    return 0;
+  }
+
+  Future delete(Delete delete) async {
+    String sqlQueryString = this.constructDeleteSql(delete);
+
+    log.finest('Delete: ' + sqlQueryString);
+
+    var result = await connection.query(sqlQueryString).toList();
+
     log.finest('Results:');
     log.finest(result);
 
-    // if model does'nt have primary key we simply return 0
-    return 0;
+    return null;
   }
 
   /**

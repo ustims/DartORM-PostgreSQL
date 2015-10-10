@@ -1,3 +1,8 @@
+0.1.0
+-----
+
+- delete() implementation.
+
 0.0.9
 -----
 
