@@ -19,6 +19,12 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
     this.connection = await psql_connector.connect(this._connectionString);
   }
 
+  /// Closes all connections to the database.
+  void close () {
+    this.connection.close();
+    log.finest('Connection closed.');
+  }
+
   Future select(Select select) async {
     try {
       var result = await super.select(select);
