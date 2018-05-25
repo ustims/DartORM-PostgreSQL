@@ -24,7 +24,7 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
     log.finest('Connection closed.');
   }
 
-  Future select(Select select) async {
+  Future<List<Map<dynamic, dynamic>>> select(Select select) async {
     try {
       var result = await super.select(select);
       return result;
@@ -62,7 +62,7 @@ class PostgresqlDBAdapter extends SQLAdapter with DBAdapter {
     return 0;
   }
 
-  Future delete(Delete delete) async {
+  Future<int> delete(Delete delete) async {
     String sqlQueryString = this.constructDeleteSql(delete);
 
     log.finest('Delete: ' + sqlQueryString);
