@@ -5,6 +5,11 @@ description: >
 author: Ustimenko Sergey <ustims@gmail.com>
 homepage: http://github.com/ustims/DartORM-PostgreSQL
 dependencies:
-  dart_orm: ">=0.0.4 <0.3.0"
+#  dart_orm: ">=0.0.4 <0.3.0"
+  dart_orm:
+#    path: ../DartORM
+    git:
+      url: https://github.com/DartOrm/DartORM
+      ref: upgrade-libraries-and-use-docker-compose
   logging: ">=0.9.2 <0.12.0"
   postgresql: ">=0.3.0+2 <0.4.0"
